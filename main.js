@@ -4,26 +4,25 @@ var floor;
 var posX = 0;
 var posY= 0;
 
-var canvas = document.getElementById("bg");
-//var ctx = canvas.getContext("2d");
-// posX =
-// posY =
+window.onload = function () {
+	  var ball = new Image();
+	  ball.src = 'Ball.png';
+      var ball2 = new Image();
+	  ball2.src = 'Ball2.png';
+ 
+	  ball.onload = function () {
+		  // CREATE CANVAS CONTEXT.
+		  var canvas = document.getElementById('bg');
+		  var ctx = canvas.getContext('2d');
+ 
+		  ctx.drawImage(ball, 0, 0);  
+          ctx.drawImage(ball2, 50, 50);
+	   }
+	}
+
 
 function gameStart() {
-    ball = new Image();
-    ball.src = "Ball.png";
-    ball2 = new Image();
-    ball2.src = "Ball2.png";
-    floor = [];
     
-    for (i = 0; i < 9; i++) {
-        floor[i] = new Image();
-    }
-    
-
-    ball.style.position = "absolute";
-    ball.style.left = posX+'px';
-    ball.style.top = posY+'px';
 }
 
 function gameChar1(width, height, color, x, y, type) {
