@@ -1,6 +1,7 @@
 var ball;   //red ball
 var ball2; //blue ball
 var floor;
+var key,pos=0;
 var posX = 0;
 var posY= 0;
 
@@ -9,15 +10,54 @@ window.onload = function () {
 	  ball.src = 'Ball.png';
       var ball2 = new Image();
 	  ball2.src = 'Ball2.png';
+      var canvas = document.getElementById('bg');
+	  var ctx = canvas.getContext('2d');
  
 	  ball.onload = function () {
-		  // CREATE CANVAS CONTEXT.
-		  var canvas = document.getElementById('bg');
-		  var ctx = canvas.getContext('2d');
- 
-		  ctx.drawImage(ball, 0, 0);  
+		  ctx.drawImage(ball, posX, posY);  
           ctx.drawImage(ball2, 50, 50);
 	   }
+
+        document.onkeydown=function(e)
+        {
+        pos=1;
+        }
+        document.onkeyup=function(e){pos=0;}
+
+        document.addEventListener('keydown', function(e){
+        setInterval(function()
+        {
+
+        if(pos == 0){
+            return;
+        }
+
+        if(e.key === 'w') {
+        posX+=2;
+        console.log(posX);
+        console.log(e.key=== 'w');
+        }
+        
+        if(e.key === 'a') {
+        console.log("A");
+        }
+
+        if(e.key === 's') {
+        console.log("S");
+        }
+        
+        if(e.key === 'd') {
+        console.log("D");
+        }
+        ctx.drawImage(ball,posX,posY);
+        },500);
+        
+        }
+        )
+
+       
+  
+
 	}
 
 
@@ -40,26 +80,8 @@ function gameChar1(width, height, color, x, y, type) {
 }
 
 function allTheOtherStuff() {
-    // ball.checkKeys = function(){ 
-    // if (keysDown[K_W]){ 
-    
-    // } 
 
-    // elif (keysDown[K_A]){ 
-
-    // } 
-
-    // elif (keysDown[K_S]){ 
-
-    // }
-
-    // elif (keysDown[K_D]){ 
-
-    // }
-
-    // elif (keysDown[K_SPACE]){ 
-
-    // }
 }
 
 gameStart();
+allTheOtherStuff();
