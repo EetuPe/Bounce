@@ -24,10 +24,10 @@ window.onload = function () {
 	var ctx = canvas.getContext('2d');
   for(i = 0; i < 9; i++) {
     floor[i] = new Image();
-    floor[i].src = "Bricks.png";
-    floor[i].onload=function() {
+		floor[i].onload=function() {
       ctx.drawImage(floor[i],i*50,posYFloor);
     }
+    floor[i].src = "Bricks.png";
   }
 
 	ball.onload=function() {
@@ -63,8 +63,6 @@ window.onload = function () {
 		if(key==39)posX2+=2;
 		if(key==40)posY2+=2;
 		canvas.width=canvas.width;
-		ctx.drawImage(ball,posX,posY);
-		ctx.drawImage(ball2,posX2,posY2);
 	},5);
 }
 
@@ -72,17 +70,22 @@ function gameStart() {
 
 }
 
-function gameChar1(width, height, color, x, y, type) {
-  ball.type = type;
-  ball.width = width;
-  ball.height = height;
-  ball.x = x;
-  ball.y = y;
-  ball.speedX = 0;
-  ball.speedY = 0;
-  ball.gravity = 0.1;
-  ball.gravitySpeed = 0;
-  ball.bounce = 1;
+function gameChar1(width, height, color, x, y, type, ball) {
+	var gravity = 1;
+	
+	if (gravity==1) {
+		setInterval(() => {
+			posY+=2;
+		}, 50);
+	}
+}
+
+function update() {
+	setInterval(() => {
+		
+	}, 5);
 }
 
 gameStart();
+gameChar1();
+update();
