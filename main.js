@@ -7,8 +7,8 @@ var posX = 0;
 var posY= 0;
 var posX2 = 0;
 var posY2 = 0;
-var posSpikeX = 0;
-var posSpikeY = 0;
+var posSpikeX = 800;
+var posSpikeY = 530;
 var spikes;
 var fallSpeed = 2;
 var jumpSpeed = 4;
@@ -24,14 +24,21 @@ window.onload = function () {
   var canvas = document.getElementById('bg');
   let posXFloor = 0;
   let posYFloor = 0;
-	var ctx = canvas.getContext('2d');
-  for(i = 0; i < 9; i++) {
-    floor[i] = new Image();
-		floor[i].onload=function() {
-      ctx.drawImage(floor[i],i*50,posYFloor);
+  var ctx = canvas.getContext('2d');
+  var floor = [];
+  for(let i = 0; i < 9; i++)
+  {
+    floor = new Image();
+	if(floor && floor.style) {
+    floor.style.height = '50px';
+    floor.style.width = '50px';
+	}
+    floor.src = "Bricks.png";
+    floor.onload=function() 
+    {
+        ctx.drawImage(floor,i*50,posYFloor);
     }
-    floor[i].src = "Bricks.png";
-  }
+}
 
 	ball.onload=function() {
 		ctx.drawImage(ball,posX,posY);
@@ -70,6 +77,10 @@ window.onload = function () {
 		ctx.drawImage(ball,posX,posY);
 		ctx.drawImage(ball2,posX2,posY2);
 		ctx.drawImage(spikes, posSpikeX, posSpikeY);
+		for(let i = 0; i < 9; i++)
+		{
+			ctx.drawImage(floor, i*50, posYFloor);
+		}
 	},1);
 }
 
@@ -85,6 +96,17 @@ function gameChar1() {
 			posY+=fallSpeed;
 		}
 	}, 1);
+
+	setInterval(() => {
+		console.log("posX = ", posX);
+		console.log("posSpikeX = ", posSpikeX);
+		console.log("posY", posY);
+		console.log("posSpikeY", posSpikeY);
+	}, 5000);
+
+	if (posX>=770 && posX<=830) {
+		alert("u ded");
+	}
 }
 
 function gameChar2() {
@@ -96,6 +118,8 @@ function gameChar2() {
 		}
 	}, 1);
 }
+
+
 
 gameStart();
 gameChar1();
