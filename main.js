@@ -66,11 +66,14 @@ window.onload = function () {
 		if(key==65)posX-=2;
 		if(key==87)posY-=jumpSpeed;
 		if(key==68)posX+=2;
+	},1);
 
+	setInterval(function() {
+		if(pos==false)return;
 		if(key==37)posX2-=2;
 		if(key==38)posY2-=jumpSpeed;
 		if(key==39)posX2+=2;
-	},1);
+	}, 1);
 
 	setInterval(function() {
 		canvas.width=canvas.width;
@@ -95,7 +98,7 @@ function gameChar1() {
 		if (gravityRed && posY < 499) {
 			posY+=fallSpeed;
 
-			if (posX>=770 && posX<=830) {
+			if (posX>=770 && posX<=830 && posY>=500) {
 				alert("u ded");
 			}
 		}
@@ -111,8 +114,6 @@ function gameChar2() {
 		}
 	}, 1);
 }
-
-
 
 gameStart();
 gameChar1();
