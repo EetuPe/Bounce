@@ -8,7 +8,7 @@ var posY= 0;
 var posX2 = 0;
 var posY2 = 0;
 var posSpikeX = 800;
-var posSpikeY = 530;
+var posSpikeY = 480;
 var spikes;
 var fallSpeed = 2;
 var jumpSpeed = 4;
@@ -23,10 +23,10 @@ window.onload = function () {
 
   var canvas = document.getElementById('bg');
   let posXFloor = 0;
-  let posYFloor = 0;
+  let posYFloor = 550;
   var ctx = canvas.getContext('2d');
   var floor = [];
-  for(let i = 0; i < 9; i++)
+  for(let i = 0; i < 25; i++)
   {
     floor = new Image();
 	if(floor && floor.style) {
@@ -77,7 +77,7 @@ window.onload = function () {
 		ctx.drawImage(ball,posX,posY);
 		ctx.drawImage(ball2,posX2,posY2);
 		ctx.drawImage(spikes, posSpikeX, posSpikeY);
-		for(let i = 0; i < 9; i++)
+		for(let i = 0; i < 25; i++)
 		{
 			ctx.drawImage(floor, i*50, posYFloor);
 		}
@@ -92,28 +92,21 @@ function gameChar1() {
 	var gravityRed = true;
 	
 	setInterval(() => {
-		if (gravityRed && posY < 549) {
+		if (gravityRed && posY < 499) {
 			posY+=fallSpeed;
+
+			if (posX>=770 && posX<=830) {
+				alert("u ded");
+			}
 		}
 	}, 1);
-
-	setInterval(() => {
-		console.log("posX = ", posX);
-		console.log("posSpikeX = ", posSpikeX);
-		console.log("posY", posY);
-		console.log("posSpikeY", posSpikeY);
-	}, 5000);
-
-	if (posX>=770 && posX<=830) {
-		alert("u ded");
-	}
 }
 
 function gameChar2() {
 	var gravityBlue = true;
 	
 	setInterval(() => {
-		if (gravityBlue && posY2 < 549) {
+		if (gravityBlue && posY2 < 499) {
 			posY2+=fallSpeed;
 		}
 	}, 1);
