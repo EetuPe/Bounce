@@ -1,19 +1,34 @@
 var ball;   //red ball
 var ball2; //blue ball
-var floor;
+var floor = [];
 var key,pos=0;
 var posX = 0;
 var posY= 0;
 var posX2 = 0;
 var posY2 = 0;
+var spikes;
 
 window.onload = function () {
-	  var ball = new Image();
-	  ball.src = 'Ball.png';
-      var ball2 = new Image();
-	  ball2.src = 'Ball2.png';
-      var canvas = document.getElementById('bg');
-	  var ctx = canvas.getContext('2d');
+	var ball = new Image();
+    ball.src = 'Ball.png';
+    var ball2 = new Image();
+    ball2.src = 'Ball2.png';
+    var spikes = new Image();
+    spikes.src = 'spikes.png';
+      
+    var canvas = document.getElementById('bg');
+    let posXFloor = 0;
+    let posYFloor = 0;
+	var ctx = canvas.getContext('2d');
+    for(i = 0; i < 9; i++)
+    {
+      floor[i] = new Image();
+      floor[i].src = "Bricks.png";
+      floor[i].onload=function()
+      {
+        ctx.drawImage(floor[i],i*50,posYFloor);
+      }
+    }
 
 ball.onload=function()
 {
@@ -23,6 +38,10 @@ ball.onload=function()
 ball2.onload=function()
 {
   ctx.drawImage(ball2,posX2,posY2);
+}
+
+spikes.onload=function() {
+ctx.drawImage(spikes,posX,posY); //temporary positioning for dar spikes
 }
 
 document.onkeydown=function(e)
@@ -64,13 +83,8 @@ function gameChar1(width, height, color, x, y, type) {
     ball.speedY = 0;    
     ball.gravity = 0.1;
     ball.gravitySpeed = 0;
-    ball.bounce = 0.6;
+    ball.bounce = 1;
     
 }
 
-function allTheOtherStuff() {
-
-}
-
 gameStart();
-allTheOtherStuff();
