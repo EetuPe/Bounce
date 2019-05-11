@@ -205,7 +205,26 @@ function gameChar2() {
 	}, 1);
 }
 
+function playSound() {
+	//alert("");
+	if (typeof background.loop == 'boolean') {
+		background.loop = true;
+	} else {
+		background.addEventListener(
+			'ended',
+			function() {
+				this.currentTime = 0;
+				this.play();
+			},
+			false
+		);
+	}
+	background.volume = 0.3;
+	background.play();
+}
+
 gameStart();
 gameChar1();
 gameChar2();
 movingSpikes();
+playSound();
