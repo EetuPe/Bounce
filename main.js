@@ -14,6 +14,10 @@ var brickPosY = 350;
 var spikes;
 var fallSpeed = 2;
 var jumpSpeed = 4;
+var movingSpikes;
+var mSpikePosX = 400;
+var mSpikePosY = 480;
+var comeBack = false;
 
 window.onload = function () {
     var ball = new Image();
@@ -24,6 +28,8 @@ window.onload = function () {
     spikes.src = 'spikes.png';
     var brick1 = new Image();
     brick1.src = 'Bricks.png';
+    var movingSpikes = new Image();
+    movingSpikes.src = 'spikes.png';
 
     var canvas = document.getElementById('bg');
     let posXFloor = 0;
@@ -58,6 +64,10 @@ window.onload = function () {
         ctx.drawImage(brick1, brickPosX, brickPosY);
     }
 
+    movingSpikes.onload = function () {
+      ctx.drawImage(movingSpikes, mSpikePosX, mSpikePosY);
+    }
+
     document.onkeydown = function (e) {
         pos = true;
         key = window.event ? e.keyCode : e.which;
@@ -88,6 +98,7 @@ window.onload = function () {
         ctx.drawImage(ball2, posX2, posY2);
         ctx.drawImage(spikes, posSpikeX, posSpikeY);
         ctx.drawImage(brick1, brickPosX, brickPosY);
+        ctx.drawImage(movingSpikes, mSpikePosX, mSpikePosY);
         for (let i = 0; i < 25; i++) {
             ctx.drawImage(floor, i * 50, posYFloor);
         }
@@ -95,6 +106,20 @@ window.onload = function () {
 }
 
 function gameStart() {}
+
+function movingSpikes() {
+  setInterval(() => {
+    if (comeBack = false && mSpikePosX < 600) { //SPIKE MOVEMENT DOESNT WORK
+      mSpikePosX += 2;
+    }
+    if (posX >= mSpikePosX - 30 && posX <= mSpikePosX + 30 && posY > mSpikePosY) {
+      alert("u ded");
+    }
+    if (posX2 >= mSpikePosX - 30 && posX2 <= mSpikePosX + 30 && posY2 > mSpikePosY) {
+      alert("u ded");
+    }
+  }, 1);
+}
 
 function gameChar1() {
     var gravityRed = true;
@@ -106,10 +131,13 @@ function gameChar1() {
         if (posX >= 770 && posX <= 830 && posY >= 500) {
             alert("u ded");
         }
-        if (posX == posX2 || posX == (posX2 + 50) && posY == posY2) {
-            posX += fallSpeed;
-            posX2 -= fallSpeed;
+        if (posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
+            posY -= 2;
         }
+        //if (posX == posX2 || posX == (posX2 + 50) && posY == posY2) {
+          //  posX += fallSpeed;
+            //posX2 -= fallSpeed;
+        //}
     }, 1);
 }
 
@@ -127,12 +155,13 @@ function gameChar2() {
             posY2 -= 2;
         }
 
-        if (posX2 == posX && posY2 == posY) {
-            posX2 -= fallSpeed;
-        }
+        //if (posX2 == posX && posY2 == posY) {
+          //  posX2 -= fallSpeed;
+        //}
     }, 1);
 }
 
 gameStart();
 gameChar1();
 gameChar2();
+movingSpikes();
