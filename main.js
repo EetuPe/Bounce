@@ -1,8 +1,7 @@
 var ball; //red ball
 var ball2; //blue ball
 var floor = [];
-var key = 0;
-var pos = false;
+var keys = new Set; //The issue with key detection was that key was a variable and could only have one value, now it's a set of variables and that allows for multiple keys to be pressed at once.
 var posX = 0;
 var posY = 0;
 var posX2 = 0;
@@ -65,31 +64,26 @@ window.onload = function () {
     }
 
     movingSpikes.onload = function () {
-      ctx.drawImage(movingSpikes, mSpikePosX, mSpikePosY);
+        ctx.drawImage(movingSpikes, mSpikePosX, mSpikePosY);
     }
 
     document.onkeydown = function (e) {
-        pos = true;
-        key = window.event ? e.keyCode : e.which;
+        keys.add(window.event ? e.keyCode : e.which);
     }
 
     document.onkeyup = function (e) {
-        pos = false;
+        keys.delete(window.event ? e.keyCode : e.which);
     }
 
     setInterval(function () {
-        if (pos == false) return;
-        else if (key == 65) posX -= 2;
-        else if (key == 87) posY -= jumpSpeed;
-        else if (key == 68) posX += 2;
+        if (keys.has(65)) posX -= 2;
+        if (keys.has(87)) posY -= jumpSpeed;
+        if (keys.has(68)) posX += 2;
+        if (keys.has(37)) posX2 -= 2;
+        if (keys.has(38)) posY2 -= jumpSpeed;
+        if (keys.has(39)) posX2 += 2;
     }, 1);
 
-    setInterval(function () {
-        if (pos == false) return;
-        else if (key == 37) posX2 -= 2;
-        else if (key == 38) posY2 -= jumpSpeed;
-        else if (key == 39) posX2 += 2;
-    }, 1);
 
 
     setInterval(function () {
@@ -108,17 +102,20 @@ window.onload = function () {
 function gameStart() {}
 
 function movingSpikes() {
-  setInterval(() => {
-    if (comeBack = false && mSpikePosX < 600) { //SPIKE MOVEMENT DOESNT WORK
-      mSpikePosX += 2;
-    }
-    if (posX >= mSpikePosX - 30 && posX <= mSpikePosX + 30 && posY > mSpikePosY) {
-      alert("u ded");
-    }
-    if (posX2 >= mSpikePosX - 30 && posX2 <= mSpikePosX + 30 && posY2 > mSpikePosY) {
-      alert("u ded");
-    }
-  }, 1);
+
+    setInterval(() => {
+        if (comeBack == false && mSpikePosX < 600) { //SPIKE MOVEMENT DOESNT WORK
+            mSpikePosX += 2;
+        }
+
+
+        if (posX >= mSpikePosX - 30 && posX <= mSpikePosX + 30 && posY > mSpikePosY) {
+            alert("u ded");
+        }
+        if (posX2 >= mSpikePosX - 30 && posX2 <= mSpikePosX + 30 && posY2 > mSpikePosY) {
+            alert("u ded");
+        }
+    }, 1);
 }
 
 function gameChar1() {
@@ -135,8 +132,8 @@ function gameChar1() {
             posY -= 2;
         }
         //if (posX == posX2 || posX == (posX2 + 50) && posY == posY2) {
-          //  posX += fallSpeed;
-            //posX2 -= fallSpeed;
+        //  posX += fallSpeed;
+        //posX2 -= fallSpeed;
         //}
     }, 1);
 }
@@ -156,7 +153,7 @@ function gameChar2() {
         }
 
         //if (posX2 == posX && posY2 == posY) {
-          //  posX2 -= fallSpeed;
+        //  posX2 -= fallSpeed;
         //}
     }, 1);
 }
