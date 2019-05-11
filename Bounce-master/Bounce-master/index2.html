@@ -1,0 +1,145 @@
+<html lang="en-US"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>SimpleGame Practice tool</title> 
+    <script type = "text/javascript" 
+            src = "simpleGame_1_0.js"> 
+    </script> 
+     <script type="text/javascript">  
+//global variables 
+var scene; 
+var Ball;
+var Ball2;
+var brick;
+
+
+
+function init(){ 
+scene = new Scene(); 
+  ball = new Sprite(scene, "Ball.png", 50, 50); 
+  ball.setSpeed(0); 
+  ball.setBoundAction(BOUNCE)
+  ball.bounce = 0.6;
+  ball.setPosition(0, 500);
+  bounceOgg = new Sound("bounce.ogg");
+
+  ball.bounce = function()
+  {
+    // this.setY(this.y - 10);
+    // for (i = 0; i < 7; i++)  
+    // { 
+    // this.setY(this.y + i);
+    // }
+    for (i = 0; i < 5; i++) {
+      setTimeout(function(){
+        ball.setY(ball.y - i);
+      }, 300);
+    }
+
+    bounceOgg.play();
+  }
+
+
+  
+  ball2 = new Sprite(scene, "Ball2.png", 50, 50); 
+  ball2.setSpeed(0); 
+  ball2.setBoundAction(BOUNCE)
+  ball2.setPosition(50, 500);
+
+  ball2.bounce = function()
+  {
+    this.setY(this.y - 10);
+  }
+
+  brick = new Sprite(scene, "Bricks.png", 100, 100);
+  brick2 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick3 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick4 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick5 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick6 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick7 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick8 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick9 = new Sprite(scene, "Bricks.png", 100, 100);
+  brick.setPosition(0, 600);
+  brick2.setPosition(100, 600);
+  brick3.setPosition(200, 600);
+  brick4.setPosition(300, 600);
+  brick5.setPosition(400, 600);
+  brick6.setPosition(500, 600);
+  brick7.setPosition(600, 600);
+  brick8.setPosition(700, 600);
+  brick9.setPosition(800, 600);
+  brick.setBoundAction(BOUNCE)
+  brick.setSpeed(0);
+  brick2.setSpeed(0);
+  brick3.setSpeed(0);
+  brick4.setSpeed(0);
+  brick5.setSpeed(0);
+  brick6.setSpeed(0);
+  brick7.setSpeed(0);
+  brick8.setSpeed(0);
+  brick9.setSpeed(0);
+
+   ball.checkKeys = function(){ 
+    ball.setSpeed(0); 
+    if (keysDown[K_RIGHT]){ 
+      ball.setSpeed(10); 
+    } 
+
+    if (keysDown[K_LEFT]){ 
+        ball.setSpeed(-10); 
+    } 
+
+    if (keysDown[K_UP]){ 
+      ball.bounce()
+    }
+
+  } // end  ball1 checkKeys 
+
+  ball2.checkKeys = function(){ 
+    ball2.setSpeed(0); 
+    if (keysDown[K_A]){ 
+      ball2.setSpeed(-10); 
+    } 
+
+    if (keysDown[K_D]){ 
+      ball2.setSpeed(10);
+    }
+
+    if (keysDown[K_SPACE]){ 
+      ball2.bounce()
+    }
+
+  } // end checkKeys 
+
+  checkCollisions = function(){
+    if (ball.collidesWith(ball2)){
+	    //BOUNCE
+  }
+  }
+
+  scene.start();
+} // end init 
+
+function update(){ 
+scene.clear(); 
+  ball.checkKeys(); 
+  ball.update();
+  ball2.checkKeys(); 
+  ball2.update();
+  brick.update();
+  brick2.update();
+  brick3.update();
+  brick4.update();
+  brick5.update();
+  brick6.update();
+  brick7.update();
+  brick8.update();
+  brick9.update();
+} // end update 
+
+</script> 
+</head> 
+<body onload = "init()"> 
+</body> 
+</html> 
