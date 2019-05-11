@@ -47,16 +47,11 @@ window.onload = function() {
 	}
 
 	var canvas = document.getElementById('bg');
-	let posXFloor = 0;
 	let posYFloor = 550;
 	var ctx = canvas.getContext('2d');
 	var floor = [];
 	for (let i = 0; i < 25; i++) {
 		floor = new Image();
-		if (floor && floor.style) {
-			floor.style.height = '50px';
-			floor.style.width = '50px';
-		}
 		floor.src = 'Bricks.png';
 		floor.onload = function() {
 			ctx.drawImage(floor, i * 50, posYFloor);
