@@ -23,6 +23,14 @@ var comeBack = false;
 var jump = new Audio('bounce.ogg');
 var death = new Audio('death.wav');
 var background = new Audio('background.wav');
+var gravity = 0.02;
+var onGround1 = false;
+var onGround2 = false;
+var velocityY2 = 0;
+var velocityY1 = 0;
+var counter = 0;
+var upAmount = 50;
+
 window.onload = function() {
 	background.play();
 	var ball = new Image();
@@ -47,11 +55,16 @@ window.onload = function() {
 	}
 
 	var canvas = document.getElementById('bg');
+	let posXFloor = 0;
 	let posYFloor = 550;
 	var ctx = canvas.getContext('2d');
 	var floor = [];
 	for (let i = 0; i < 25; i++) {
 		floor = new Image();
+		if (floor && floor.style) {
+			floor.style.height = '50px';
+			floor.style.width = '50px';
+		}
 		floor.src = 'Bricks.png';
 		floor.onload = function() {
 			ctx.drawImage(floor, i * 50, posYFloor);
@@ -89,14 +102,18 @@ window.onload = function() {
 	setInterval(function() {
 		if (keys.has(65)) posX -= 2;
 		if (keys.has(87)) {
-			posY -= jumpSpeed;
+			velocityY1 -= 20;
 			jump.play();
 		}
 		if (keys.has(68)) posX += 2;
 		if (keys.has(37)) posX2 -= 2;
-		if (keys.has(38)) {
-			posY2 -= jumpSpeed;
-			jump.play();
+		if (keys.has(38) && posY2 >= 499) {
+			jump.play()
+			for (i = 0; i < 3; i++) {
+				setTimeout(function() {
+					posY2 -= 20;
+				}, 500);
+			}
 		}
 		if (keys.has(39)) posX2 += 2;
 	}, 1);
@@ -138,13 +155,16 @@ function movingSpikes() {
 	}, 1);
 }
 
+
+
 function gameChar1() {
-	var gravityRed = true;
+	// var gravityRed = true;
 
 	setInterval(() => {
-		if (gravityRed && posY < 499) {
-			posY += fallSpeed;
-		}
+		// if (gravityRed && posY < 499) {
+		// 	posY += fallSpeed;
+		// }
+
 
 		if (posX == 1200) {
 			posX = 0;
@@ -166,16 +186,27 @@ function gameChar1() {
 		//  posX += fallSpeed;
 		//posX2 -= fallSpeed;
 		//}
+		if (posY >= 499) {
+			onGround1 = true;
+			velocityY1 = 0;
+		} 
+		else {
+			onGround = false;
+		}
+		if (!onGround1) {
+			velocityY1 += gravity;
+		}
+		posY += velocityY1;
 	}, 1);
 }
 
 function gameChar2() {
-	var gravityBlue = true;
+	// var gravityBlue = true;
 
 	setInterval(() => {
-		if (gravityBlue && posY2 < 499) {
-			posY2 += fallSpeed;
-		}
+		// if (gravityBlue && posY2 < 499) {
+		// 	posY2 += fallSpeed;
+		// }
 
 		if (posX2 == 1200) {
 			posX2 = 0;
@@ -197,29 +228,21 @@ function gameChar2() {
 		//if (posX2 == posX && posY2 == posY) {
 		//  posX2 -= fallSpeed;
 		//}
+		if (posY2 >= 499) {
+			onGround2 = true;
+			velocityY2 = 0;
+		}
+		else {
+			onGround2 = false;
+		}
+		if (!onGround2) {
+			velocityY2 += gravity;
+		}
+		posY2 += velocityY2;
 	}, 1);
-}
-
-function playSound() {
-	//alert("");
-	if (typeof background.loop == 'boolean') {
-		background.loop = true;
-	} else {
-		background.addEventListener(
-			'ended',
-			function() {
-				this.currentTime = 0;
-				this.play();
-			},
-			false
-		);
-	}
-	background.volume = 0.3;
-	background.play();
 }
 
 gameStart();
 gameChar1();
 gameChar2();
 movingSpikes();
-playSound();
