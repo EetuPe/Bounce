@@ -11,8 +11,12 @@ var time = 0;
 var time2 = 0;
 var posSpikeX = 800;
 var posSpikeY = 480;
+var posSpikeX2 = 400;
+var posSpikeY2 = 480;
 var brickPosX = 700;
-var brickPosY = 350;
+var brickPosY = 400;
+var brickPosX2 = 500;
+var brickPosY2 = 400;
 var spikes;
 var fallSpeed = 2;
 var jumpSpeed = 4;
@@ -141,7 +145,9 @@ window.onload = function () {
 		ctx.drawImage(ball, posX, posY);
 		ctx.drawImage(ball2, posX2, posY2);
 		ctx.drawImage(spikes, posSpikeX, posSpikeY);
+		ctx.drawImage(spikes, posSpikeX2, posSpikeY2);
 		ctx.drawImage(brick1, brickPosX, brickPosY);
+		ctx.drawImage(brick1, brickPosX2, brickPosY2);
 		ctx.drawImage(movingSpikes, mSpikePosX, mSpikePosY);
 		for (let i = 0; i < 25; i++) {
 			ctx.drawImage(floor, i * 50, posYFloor);
@@ -188,7 +194,7 @@ function gameChar1() {
 			alert('Player 1 Wins');
 			time = 0;
 			time2 = 0;
-			window.location.href = "level2.html"
+			window.location.href = "level3.html";
 		}
 
 		if (posX >= posSpikeX - 30 && posX <= posSpikeX + 30 && posY >= posSpikeY + 30) {
@@ -201,7 +207,7 @@ function gameChar1() {
 		//  posX += fallSpeed;
 		//posX2 -= fallSpeed;
 		//}
-		if (posY >= 499 || (posX >= brickPosX - 50 && posX <= brickPosX + 25 && posY >= brickPosY - 45 && posY <= brickPosY - 25)) {
+		if (posY >= 499 || (posX >= brickPosX - 50 && posX <= brickPosX + 25 && posY >= brickPosY - 45 && posY <= brickPosY - 25) || (posX >= brickPosX2 - 50 && posX <= brickPosX2 + 25 && posY >= brickPosY2 - 45 && posY <= brickPosY2 - 25)) {
 			onGround1 = true;
 			velocityY1 = 0;
 		} else {
@@ -229,7 +235,7 @@ function gameChar2() {
 			alert('Player 2 Wins');
 			time2 = 0;
 			time = 0;
-			window.location.href = "level2.html";
+			window.location.href = "level3.html";
 		}
 
 		if (posX2 >= posSpikeX - 30 && posX2 <= posSpikeX + 30 && posY2 >= posSpikeY + 30) {
