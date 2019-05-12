@@ -23,14 +23,15 @@ var comeBack = false;
 var jump = new Audio('bounce.ogg');
 var death = new Audio('death.wav');
 var background = new Audio('background.wav');
-var gravity = 0.02;
+var gravity = 0.09;
 var onGround1 = false;
 var onGround2 = false;
 var velocityY2 = 0;
 var velocityY1 = 0;
 var counter = 0;
-var upAmount = 2;
-var speed = 5;
+var counter2 = 0;
+var upAmount = 6;
+var speed = 3;
 
 
 window.onload = function() {
@@ -104,24 +105,34 @@ window.onload = function() {
 	setInterval(function() {
 		if (keys.has(65)) posX -= speed;
 		if (keys.has(87) && onGround1) {
-			for (i = 0; i < 60; i++) {
-				posY -= upAmount;
-				setTimeout(function() {
+			var jump1 = setInterval(ballUp, 1);
+			function ballUp() {
+				if (counter > 50) {
+					clearInterval(jump1)
+				}
+				else {
 					posY -= upAmount;
-				}, 1000/60);
+					counter++;
+				}
 			}
 			jump.play();
+			counter = 0;
 		}
 		if (keys.has(68)) posX += speed;
 		if (keys.has(37)) posX2 -= speed;
 		if (keys.has(38) && onGround2) {
-			jump.play();
-			for (i = 0; i < 60; i++) {
-				posY2 -= upAmount;
-				setTimeout(function() {
+			var jump2 = setInterval(ballUp2, 1);
+			function ballUp2() {
+				if (counter2 > 50) {
+					clearInterval(jump2)
+				}
+				else {
 					posY2 -= upAmount;
-				}, 1000/60);
+					counter2++;
+				}
 			}
+			jump.play();
+			counter2 = 0;
 		}
 		if (keys.has(39)) posX2 += speed;
 	}, 1);
