@@ -29,7 +29,9 @@ var onGround2 = false;
 var velocityY2 = 0;
 var velocityY1 = 0;
 var counter = 0;
-var upAmount = 50;
+var upAmount = 2;
+var speed = 5;
+
 
 window.onload = function() {
 	background.play();
@@ -46,12 +48,12 @@ window.onload = function() {
 	if (timeOngoing == true && posX != 1200) {
 		setInterval(() => {
 			time += 1;
-		}, 1000);
+		}, 1);
 	}
 	if (timeOngoing == true && posX2 != 1200) {
 		setInterval(() => {
 			time2 += 1;
-		}, 1000);
+		}, 1);
 	}
 
 	var canvas = document.getElementById('bg');
@@ -100,22 +102,28 @@ window.onload = function() {
 	};
 
 	setInterval(function() {
-		if (keys.has(65)) posX -= 2;
-		if (keys.has(87)) {
-			velocityY1 -= 20;
+		if (keys.has(65)) posX -= speed;
+		if (keys.has(87) && onGround1) {
+			for (i = 0; i < 60; i++) {
+				posY -= upAmount;
+				setTimeout(function() {
+					posY -= upAmount;
+				}, 1000/60);
+			}
 			jump.play();
 		}
-		if (keys.has(68)) posX += 2;
-		if (keys.has(37)) posX2 -= 2;
-		if (keys.has(38) && posY2 >= 499) {
-			jump.play()
-			for (i = 0; i < 3; i++) {
+		if (keys.has(68)) posX += speed;
+		if (keys.has(37)) posX2 -= speed;
+		if (keys.has(38) && onGround2) {
+			jump.play();
+			for (i = 0; i < 60; i++) {
+				posY2 -= upAmount;
 				setTimeout(function() {
-					posY2 -= 20;
-				}, 500);
+					posY2 -= upAmount;
+				}, 1000/60);
 			}
 		}
-		if (keys.has(39)) posX2 += 2;
+		if (keys.has(39)) posX2 += speed;
 	}, 1);
 
 	setInterval(function() {
@@ -168,7 +176,9 @@ function gameChar1() {
 
 		if (posX == 1200) {
 			posX = 0;
-			console.log('Player 1', time);
+			posX2 = 0;
+			// alert('Player 1 Score:' + time.toString());
+			alert("Player 1 Wins")
 			time = 0;
 			time2 = 0;
 		}
@@ -179,19 +189,16 @@ function gameChar1() {
 			posY = 0;
 			posX = 0;
 		}
-		if (posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
-			posY -= 2;
-		}
 		//if (posX == posX2 || posX == (posX2 + 50) && posY == posY2) {
 		//  posX += fallSpeed;
 		//posX2 -= fallSpeed;
 		//}
-		if (posY >= 499) {
+		if (posY >= 499 || posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
 			onGround1 = true;
 			velocityY1 = 0;
 		} 
 		else {
-			onGround = false;
+			onGround1 = false;
 		}
 		if (!onGround1) {
 			velocityY1 += gravity;
@@ -209,8 +216,10 @@ function gameChar2() {
 		// }
 
 		if (posX2 == 1200) {
+			posX = 0;
 			posX2 = 0;
-			console.log('Player 2', time2);
+			// alert('Player 2 Score: ' + time2.toString());
+			alert("Player 2 Wins")
 			time2 = 0;
 			time = 0;
 		}
@@ -221,14 +230,11 @@ function gameChar2() {
 			posY2 = 0;
 			posX2 = 0;
 		}
-		if (posX2 >= 650 && posX2 <= 725 && posY2 >= 305 && posY2 <= 325) {
-			posY2 -= 2;
-		}
 
 		//if (posX2 == posX && posY2 == posY) {
 		//  posX2 -= fallSpeed;
 		//}
-		if (posY2 >= 499) {
+		if (posY2 >= 499 || posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
 			onGround2 = true;
 			velocityY2 = 0;
 		}
