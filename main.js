@@ -234,7 +234,7 @@ function gameChar2() {
 		//if (posX2 == posX && posY2 == posY) {
 		//  posX2 -= fallSpeed;
 		//}
-		if (posY2 >= 499 || posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
+		if (posY2 >= 499 || posX2 >= 650 && posX2 <= 725 && posY2 >= 305 && posY2 <= 325) {
 			onGround2 = true;
 			velocityY2 = 0;
 		}
