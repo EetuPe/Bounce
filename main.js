@@ -29,7 +29,9 @@ var onGround2 = false;
 var velocityY2 = 0;
 var velocityY1 = 0;
 var counter = 0;
-var upAmount = 50;
+var upAmount = 2;
+var speed = 5;
+
 
 window.onload = function() {
 	background.play();
@@ -100,22 +102,28 @@ window.onload = function() {
 	};
 
 	setInterval(function() {
-		if (keys.has(65)) posX -= 2;
-		if (keys.has(87)) {
-			velocityY1 -= 20;
+		if (keys.has(65)) posX -= speed;
+		if (keys.has(87) && onGround1) {
+			for (i = 0; i < 60; i++) {
+				posY -= upAmount;
+				setTimeout(function() {
+					posY -= upAmount;
+				}, 1000/60);
+			}
 			jump.play();
 		}
-		if (keys.has(68)) posX += 2;
-		if (keys.has(37)) posX2 -= 2;
-		if (keys.has(38) && posY2 >= 499) {
-			jump.play()
-			for (i = 0; i < 3; i++) {
+		if (keys.has(68)) posX += speed;
+		if (keys.has(37)) posX2 -= speed;
+		if (keys.has(38) && onGround2) {
+			jump.play();
+			for (i = 0; i < 60; i++) {
+				posY2 -= upAmount;
 				setTimeout(function() {
-					posY2 -= 20;
-				}, 500);
+					posY2 -= upAmount;
+				}, 1000/60);
 			}
 		}
-		if (keys.has(39)) posX2 += 2;
+		if (keys.has(39)) posX2 += speed;
 	}, 1);
 
 	setInterval(function() {
@@ -179,19 +187,16 @@ function gameChar1() {
 			posY = 0;
 			posX = 0;
 		}
-		if (posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
-			posY -= 2;
-		}
 		//if (posX == posX2 || posX == (posX2 + 50) && posY == posY2) {
 		//  posX += fallSpeed;
 		//posX2 -= fallSpeed;
 		//}
-		if (posY >= 499) {
+		if (posY >= 499 || posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
 			onGround1 = true;
 			velocityY1 = 0;
 		} 
 		else {
-			onGround = false;
+			onGround1 = false;
 		}
 		if (!onGround1) {
 			velocityY1 += gravity;
@@ -221,22 +226,19 @@ function gameChar2() {
 			posY2 = 0;
 			posX2 = 0;
 		}
-		if (posX2 >= 650 && posX2 <= 725 && posY2 >= 305 && posY2 <= 325) {
-			posY2 -= 2;
-		}
 
 		//if (posX2 == posX && posY2 == posY) {
 		//  posX2 -= fallSpeed;
 		//}
-		if (posY2 >= 499) {
-			onGround2 = true;
-			velocityY2 = 0;
-		}
 		else {
 			onGround2 = false;
 		}
 		if (!onGround2) {
 			velocityY2 += gravity;
+		}
+		if (posY2 >= 499 || posX >= 650 && posX <= 725 && posY >= 305 && posY <= 325) {
+			onGround2 = true;
+			velocityY2 = 0;
 		}
 		posY2 += velocityY2;
 	}, 1);
