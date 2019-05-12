@@ -227,7 +227,7 @@ function gameChar1() {
             posX2 = 0;
             posX3 = 0;
             // alert('Player 1 Score:' + time.toString());
-            alert('Player 1 Wins');
+            alert('Miika Wins');
             time = 0;
             time2 = 0;
             time3 = 0;
@@ -251,6 +251,7 @@ function gameChar1() {
             onGround1 = false;
         }
         if (!onGround1) {
+            Commit
             velocityY1 += gravity;
         }
         posY += velocityY1;
@@ -269,7 +270,7 @@ function gameChar2() {
             posX = 0;
             posX2 = 0;
             // alert('Player 2 Score: ' + time2.toString());
-            alert('Player 2 Wins');
+            alert('Danila Wins');
             time2 = 0;
             time = 0;
             window.location.href = "level3.html";
