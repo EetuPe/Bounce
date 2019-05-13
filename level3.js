@@ -343,7 +343,7 @@ function gameChar3() {
             time2 = 0;
             time = 0;
             time3 = 0;
-            window.location.href = "level2.html";
+            window.location.href = "level3.html";
         }
 
         if (posX3 >= posSpikeX - 30 && posX3 <= posSpikeX + 30 && posY3 >= posSpikeY + 30) {
@@ -356,7 +356,7 @@ function gameChar3() {
         //if (posX2 == posX && posY2 == posY) {
         //  posX2 -= fallSpeed;
         //}
-        if (posY3 >= 499 || (posX3 >= brickPosX - 50 && posX3 <= brickPosX + 25 && posY3 >= brickPosY - 45 && posY3 <= brickPosY - 25)) {
+        if (posY3 >= 499 || (posX3 >= brickPosX - 50 && posX3 <= brickPosX + 25 && posY3 >= brickPosY - 45 && posY3 <= brickPosY - 25)  || (posX3 >= brickPos2X - 50 && posX3 <= brickPos2X + 25 && posY3 >= brickPos2Y - 45 && posY3 <= brickPos2Y - 25)) {
             onGround3 = true;
             velocityY3 = 0;
         } else {
