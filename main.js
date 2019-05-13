@@ -227,7 +227,7 @@ function gameChar1() {
             window.location.href = "level2.html"
         }
 
-        if (posX >= posSpikeX - 30 && posX <= posSpikeX + 30 && posY >= posSpikeY + 30) {
+        if (posX >= posSpikeX - 30 && posX <= posSpikeX + 30 && posY > posSpikeY) {
             // alert('u ded');
             death.play();
             posY = 0;
@@ -268,7 +268,7 @@ function gameChar2() {
             window.location.href = "level2.html";
         }
 
-        if (posX2 >= posSpikeX - 30 && posX2 <= posSpikeX + 30 && posY2 >= posSpikeY + 30) {
+        if (posX2 >= posSpikeX - 30 && posX2 <= posSpikeX + 30 && posY2 > posSpikeY) {
             // alert('u ded');
             death.play();
             posY2 = 0;
@@ -311,7 +311,7 @@ function gameChar3() {
             window.location.href = "level2.html";
         }
 
-        if (posX3 >= posSpikeX - 30 && posX3 <= posSpikeX + 30 && posY3 >= posSpikeY + 30) {
+        if (posX3 >= posSpikeX - 30 && posX3 <= posSpikeX + 30 && posY3 > posSpikeY) {
             // alert('u ded');
             death.play();
             posY3 = 0;

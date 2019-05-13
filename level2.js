@@ -234,7 +234,13 @@ function gameChar1() {
             window.location.href = "level3.html";
         }
 
-        if (posX >= posSpikeX - 30 && posX <= posSpikeX + 30 && posY >= posSpikeY + 30) {
+        if (posX >= posSpikeX - 30 && posX <= posSpikeX + 30 && posY >= posSpikeY) {
+            // alert('u ded');
+            death.play();
+            posY = 0;
+            posX = 0;
+        }
+        if (posX >= posSpikeX2 - 30 && posX <= posSpikeX2 + 30 && posY >= posSpikeY2) {
             // alert('u ded');
             death.play();
             posY = 0;
@@ -275,7 +281,13 @@ function gameChar2() {
             window.location.href = "level3.html";
         }
 
-        if (posX2 >= posSpikeX - 30 && posX2 <= posSpikeX + 30 && posY2 >= posSpikeY + 30) {
+        if (posX2 >= posSpikeX - 30 && posX2 <= posSpikeX + 30 && posY2 >= posSpikeY) {
+            // alert('u ded');
+            death.play();
+            posY2 = 0;
+            posX2 = 0;
+        }
+        if (posX2 >= posSpikeX2 - 30 && posX2 <= posSpikeX2 + 30 && posY2 >= posSpikeY2) {
             // alert('u ded');
             death.play();
             posY2 = 0;
@@ -318,7 +330,13 @@ function gameChar3() {
             window.location.href = "level2.html";
         }
 
-        if (posX3 >= posSpikeX - 30 && posX3 <= posSpikeX + 30 && posY3 >= posSpikeY + 30) {
+        if (posX3 >= posSpikeX - 30 && posX3 <= posSpikeX + 30 && posY3 >= posSpikeY) {
+            // alert('u ded');
+            death.play();
+            posY3 = 0;
+            posX3 = 0;
+        }
+        if (posX3 >= posSpikeX2 - 30 && posX3 <= posSpikeX2 + 30 && posY3 >= posSpikeY2) {
             // alert('u ded');
             death.play();
             posY3 = 0;
