@@ -251,7 +251,6 @@ function gameChar1() {
             onGround1 = false;
         }
         if (!onGround1) {
-            Commit
             velocityY1 += gravity;
         }
         posY += velocityY1;
@@ -329,7 +328,7 @@ function gameChar3() {
         //if (posX2 == posX && posY2 == posY) {
         //  posX2 -= fallSpeed;
         //}
-        if (posY3 >= 499 || (posX3 >= brickPosX - 50 && posX3 <= brickPosX + 25 && posY3 >= brickPosY - 45 && posY3 <= brickPosY - 25)) {
+        if (posY3 >= 499 || (posX3 >= brickPosX - 50 && posX3 <= brickPosX + 25 && posY3 >= brickPosY - 45 && posY3 <= brickPosY - 25) || (posX3 >= brickPosX2 - 50 && posX3 <= brickPosX2 + 25 && posY3 >= brickPosY2 - 45 && posY3 <= brickPosY2 - 25)) {
             onGround3 = true;
             velocityY3 = 0;
         } else {
